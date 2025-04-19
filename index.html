@@ -2,160 +2,215 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>YADHU'S TECH</title>
+  <title>Yadhu's Tech Solutions</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    :root {
+      --primary-color: #2A4365;
+      --secondary-color: #4299E1;
+      --accent-color: #48BB78;
+      --light-bg: #adadad;
+      --dark-text: #2D3748;
+    }
+
+    * {
       margin: 0;
       padding: 0;
-      color: #333;
+      box-sizing: border-box;
     }
 
-    /* Header slideshow container */
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--dark-text);
+      line-height: 1.6;
+    }
+
     .header-container {
       position: relative;
+      height: 400px;
       overflow: hidden;
-      height: 300px; /* Adjust height as needed */
     }
 
-    /* Slideshow styling */
     .slideshow {
       position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
-      z-index: 0;
     }
 
     .slideshow img {
       position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       opacity: 0;
-      transition: opacity 1.5s ease-in-out;
+      transition: opacity 1s ease-in-out;
     }
 
     .slideshow img.active {
       opacity: 1;
     }
 
-    /* Header content */
     header {
       position: relative;
       z-index: 1;
-      background: rgba(30, 60, 114, 0.7); /* Semi-transparent overlay */
+      background: rgba(42, 67, 101, 0.85);
       color: white;
-      padding: 40px 20px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      padding: 2rem;
       height: 100%;
-      box-sizing: border-box;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .header-content {
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     header h1 {
-      margin: 0;
-      font-size: 40px;
-      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
 
-    header p {
-      margin: 10px 0;
-      font-size: 18px;
+    .contact-info {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
     }
 
-    header a {
-      color: #ffffff;
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .contact-item a {
+      color: white;
       text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
+      transition: color 0.3s ease;
     }
 
-    header a:hover {
-      color: #ff0000;
-      text-decoration: underline;
+    .contact-item a:hover {
+      color: var(--secondary-color);
     }
 
     .container {
-      
-      max-width: 600px;
-      background: #f6f7f3;
-      margin: 40px auto;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      border: 1px solid #2e0909;
+      max-width: 800px;
+      margin: 3rem auto;
+      background: rgb(255, 255, 255);
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    .container h2 {
+    .form-header {
       text-align: center;
-      color: #0b0b0b;
-      margin-bottom: 25px;
+      margin-bottom: 2rem;
+    }
+
+    .form-header h2 {
+      color: var(--primary-color);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-header p {
+      color: #718096;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
     }
 
     label {
       display: block;
-      margin-top: 15px;
-      font-weight: bold;
-      color: #555;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--primary-color);
     }
 
-    select, input[type="text"], button {
+    input, select {
       width: 100%;
-      padding: 12px;
-      margin-top: 8px;
+      padding: 0.875rem;
+      border: 2px solid #4e5762;
       border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      transition: box-shadow 0.3s;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
     }
 
-    select:focus, input[type="text"]:focus {
-      box-shadow: 0 0 8px #f99aaa;
+    input:focus, select:focus {
       outline: none;
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+    }
+
+    .button-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
     }
 
     button {
-      background-color: #25D366;
-      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1rem 1.5rem;
       border: none;
-      margin-top: 20px;
+      border-radius: 8px;
+      font-weight: 600;
       cursor: pointer;
-      font-size: 18px;
-      transition: background 0.3s;
-    }
-
-    .email-button {
-      background-color: #ff6f61;
-    }
-
-    .email-button:hover {
-      background-color: #e3503f;
+      transition: transform 0.2s ease, opacity 0.2s ease;
     }
 
     button:hover {
-      background-color: #128c7e;
+      transform: translateY(-2px);
+    }
+
+    .whatsapp-btn {
+      background: #25D366;
+      color: white;
+    }
+
+    .email-btn {
+      background: var(--primary-color);
+      color: white;
     }
 
     footer {
+      background: var(--primary-color);
+      color: white;
+      padding: 2rem;
       text-align: center;
-      padding: 20px;
-      font-size: 14px;
-      color: #555;
-      background-color: #ffe0e9;
+      margin-top: 4rem;
     }
 
-    footer span {
-      color: #000000;
-      font-weight: bold;
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        height: 300px;
+      }
+
+      .container {
+        margin: 2rem 1rem;
+        padding: 1.5rem;
+      }
+
+      .button-group {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -163,117 +218,125 @@
 
   <div class="header-container">
     <div class="slideshow">
-      <!-- Placeholder images for the slideshow -->
-      <img src="pexels-sebastiaan9977-1097456.jpg" alt="Tech Background 1" class="active">
-      <img src="pexels-nickmayer-14389542.jpg" alt="Tech Background 2">
-      <img src="pexels-sebastiaan9977-1097469.jpg" alt="Tech Background 3">
-      <img src="pexels-nickmayer-14389542.jpg" alt="Tech Background 4">
-      
+      <img src="WhatsApp Image 2025-04-19 at 13.31.05_4fba3198.jpg" class="active" alt="img1">
+    
     </div>
     <header>
-      <h1>YADHU'S KINGDOM</h1>
-      <p>എവിടെയും എപ്പോഴും
-      </p>
-      <p>📞 <a href="tel:8921265437">8921265437</a></p>
-      <p>📧 <a href="mailto:yadhudir@gmail.com">yadhudir@gmail.com</a></p>
+      <div class="header-content">
+        <h1>YADHU SATHEESH</h1>
+        <p>THE PURPOSE OF THIS SITE IS TO CONVEY YOUR REQUEST TO ME FOR </p>
+        <p>VIDEO EDITING & MINI MOBILE PHOTOGRAPHY VIDEOGRAPHY</p>
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <a href="tel:8921265437">+91 89212 65437</a>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:yadhudir@gmail.com">yadhudir@gmail.com</a>
+          </div>
+        </div>
+      </div>
     </header>
   </div>
 
   <div class="container">
-     
-    <h2>Service Request Form</h2>
+    <div class="form-header">
+      <h2>Service Request Form</h2>
+      <p>Get in touch with our experts for premium services</p>
+    </div>
     <form id="serviceForm">
-      <label for="name">Your Name</label>
-      <input type="text" id="name" name="name" required>
-
-      <label for="service">Choose a Service</label>
-      <select id="service" name="service" required>
-        <option value="">-- Select a service --</option>
-        <option value="Video Editing">Video Editing</option>
-        <option value="Mobile Portrait Photography">Mobile Portrait Photography</option>
-        <option value="Mobile Videography">Mobile Videography</option>
-      </select>
-
-      <button type="button" onclick="sendToWhatsApp()">
-      <img src="—Pngtree—whatsapp icon whatsapp logo whatsapp_3584845.png" alt="WhatsApp" style="height: 30px;">Send on WhatsApp </button>
-      <button type="button" class="email-button" onclick="sendToEmail()">
-      <img src="—Pngtree—the gmail logo on a_15475667.png" alt="Email" style="height: 30px;">Send to Email </button>>
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" required>
+      </div>
+      <div class="form-group">
+        <label for="service">Select Service</label>
+        <select id="service" required>
+          <option value="">Choose a service</option>
+          <option value="Video Editing">Professional Video Editing</option>
+          <option value="Mobile Portrait Photography">Mobile Portrait Photography</option>
+          <option value="Mobile Videography">Mobile Videography Services</option>
+        </select>
+      </div>
+      <div class="button-group">
+        <button type="button" class="whatsapp-btn" onclick="sendToWhatsApp()">
+          <i class="fab fa-whatsapp"></i>
+          WhatsApp
+        </button>
+        <button type="button" class="email-btn" onclick="sendToEmail()">
+          <i class="fas fa-envelope"></i>
+          Email
+        </button>
+      </div>
     </form>
   </div>
 
   <footer>
-    &copy; 2025 <span>YADHU KRISHNAN S</span> | All Rights Reserved
+    <div class="footer-content">
+      <p>&copy; 2025 Yadhu Krishnan S | All rights reserved.</p>
+    </div>
   </footer>
 
   <script>
+    // JavaScript remains similar with improvements for better UX
     function getFormData() {
-      const name = document.getElementById("name").value.trim();
-      const service = document.getElementById("service").value;
-      return { name, service };
+      return {
+        name: document.getElementById('name').value.trim(),
+        service: document.getElementById('service').value
+      };
+    }
+
+    function validateForm(data) {
+      if (!data.name || !data.service) {
+        alert('Please complete all required fields');
+        return false;
+      }
+      return true;
     }
 
     function sendToWhatsApp() {
-      const { name, service } = getFormData();
-
-      if (!name || !service) {
-        alert("Please fill out all fields.");
-        return;
-      }
-
-      const phone = "918921265437";
-      const message = `Hi, I'm ${name}. I would like to request the service: ${service}.`;
-      const whatsappURL = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-      window.open(whatsappURL, '_blank');
-    }
-
-    function sendToEmail() {
-      const { name, service } = getFormData();
-
-      if (!name || !service) {
-        alert("Please fill out all fields.");
-        return;
-      }
-
-      fetch("https://formspree.io/f/mqapvyko", {
-        method: "POST",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ name, service })
-      }).then(response => {
-        if (response.ok) {
-          alert("Form sent to YADHU's email successfully!");
-        } else {
-          alert("Failed to send email. Try again later.");
-        }
-      }).catch(error => {
-        console.error("Error:", error);
-        alert("There was a problem sending your email.");
-      });
-    }
-
-    // Slideshow functionality
-    function runSlideshow() {
-      const images = document.querySelectorAll('.slideshow img');
-      let currentIndex = 0;
+      const data = getFormData();
+      if (!validateForm(data)) return;
       
-      setInterval(() => {
-        // Remove active class from all images
-        for (let i = 0; i < images.length; i++) {
-          images[i].classList.remove('active');
-        }
-        
-        // Increment index and handle overflow
-        currentIndex = (currentIndex + 1) % images.length;
-        
-        // Add active class to next image
-        images[currentIndex].classList.add('active');
-      }, 2000); // Changed from 5000 to 2000 - now changes image every 2 seconds
+      const message = `Hello, I'm ${data.name}.\nI'm interested in your ${data.service} service.`;
+      const encodedMessage = encodeURIComponent(message);
+      window.open(`https://wa.me/918921265437?text=${encodedMessage}`, '_blank');
     }
 
-    // Start the slideshow when the page loads
-    window.onload = runSlideshow;
+    async function sendToEmail() {
+      const data = getFormData();
+      if (!validateForm(data)) return;
+
+      try {
+        const response = await fetch('https://formspree.io/f/mqapvyko', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        
+        if (response.ok) {
+          alert('Your request has been successfully submitted!');
+          document.getElementById('serviceForm').reset();
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch (error) {
+        alert('There was an error submitting your request. Please try again.');
+      }
+    }
+
+    // Enhanced slideshow with smooth transitions
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slideshow img');
+
+    function nextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+
+    setInterval(nextSlide, 5000);
   </script>
 
 </body>
