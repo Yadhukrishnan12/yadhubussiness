@@ -2,16 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Yadhu's Tech Solutions</title>
+  <title>Yadhukrishnans</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     :root {
-      --primary-color: #2A4365;
-      --secondary-color: #4299E1;
-      --accent-color: #48BB78;
-      --light-bg: #adadad;
-      --dark-text: #2D3748;
+      --primary-color: #06B6D4;
+      --secondary-color: #3B82F6;
+      --accent-color: #10B981;
+      --dark-bg: #0F172A;
+      --darker-bg: #020617;
+      --card-bg: #1E293B;
+      --light-text: #F1F5F9;
+      --muted-text: #94A3B8;
+      --input-bg: #334155;
+      --input-border: #475569;
+      --navbar-bg: rgba(15, 23, 42, 0.95);
     }
 
     * {
@@ -22,15 +28,114 @@
 
     body {
       font-family: 'Inter', 'Segoe UI', sans-serif;
-      background-color: var(--light-bg);
-      color: var(--dark-text);
+      background-color: var(--dark-bg);
+      color: var(--light-text);
       line-height: 1.6;
+      padding-top: 60px; /* Space for fixed navbar */
     }
 
+    /* Animated Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: var(--navbar-bg);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      padding: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .navbar.scrolled {
+      padding: 0;
+      background-color: rgba(2, 6, 23, 0.98);
+    }
+
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--light-text);
+      font-weight: 700;
+      font-size: 1.25rem;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo span {
+      color: var(--primary-color);
+    }
+
+    .logo i {
+      color: var(--primary-color);
+      font-size: 1.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links li a {
+      color: var(--light-text);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: var(--primary-color);
+    }
+
+    .nav-links li a:hover::after {
+      width: 100%;
+    }
+
+    .mobile-nav-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--light-text);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Header and Slideshow */
     .header-container {
       position: relative;
-      height: 400px;
+      height: 450px;
       overflow: hidden;
+      margin-top: 1rem;
     }
 
     .slideshow {
@@ -46,6 +151,7 @@
       object-fit: cover;
       opacity: 0;
       transition: opacity 1s ease-in-out;
+      filter: brightness(0.6) saturate(1.2);
     }
 
     .slideshow img.active {
@@ -55,7 +161,7 @@
     header {
       position: relative;
       z-index: 1;
-      background: rgba(42, 67, 101, 0.85);
+      background: linear-gradient(to right, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.7));
       color: white;
       padding: 2rem;
       height: 100%;
@@ -72,10 +178,37 @@
     }
 
     header h1 {
-      font-size: 2.5rem;
+      font-size: 2.75rem;
       margin-bottom: 1rem;
       font-weight: 700;
       letter-spacing: 1px;
+      color: var(--light-text);
+      text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+      animation: fadeInUp 1s ease-out;
+    }
+
+    header p {
+      color: var(--light-text);
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeInUp 1s ease-out 0.2s;
+      animation-fill-mode: both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .highlight {
+      color: var(--primary-color);
+      font-weight: 500;
     }
 
     .contact-info {
@@ -83,31 +216,66 @@
       display: flex;
       gap: 1.5rem;
       justify-content: center;
+      animation: fadeIn 1s ease-out 0.4s;
+      animation-fill-mode: both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .contact-item {
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: rgba(2, 6, 23, 0.5);
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .contact-item:hover {
+      background-color: rgba(6, 182, 212, 0.2);
+      transform: translateY(-3px);
+    }
+
+    .contact-item i {
+      color: var(--primary-color);
     }
 
     .contact-item a {
-      color: white;
+      color: var(--light-text);
       text-decoration: none;
       transition: color 0.3s ease;
     }
 
     .contact-item a:hover {
-      color: var(--secondary-color);
+      color: var(--primary-color);
     }
 
+    /* Main content */
     .container {
       max-width: 800px;
       margin: 3rem auto;
-      background: rgb(255, 255, 255);
+      background: var(--card-bg);
       padding: 2.5rem;
       border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
     }
 
     .form-header {
@@ -116,46 +284,61 @@
     }
 
     .form-header h2 {
-      color: var(--primary-color);
+      color: var(--light-text);
       font-size: 2rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .form-header h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
     }
 
     .form-header p {
-      color: #718096;
+      color: var(--muted-text);
     }
 
     .form-group {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
     }
 
     label {
       display: block;
       margin-bottom: 0.5rem;
       font-weight: 500;
-      color: var(--primary-color);
+      color: var(--light-text);
     }
 
     input, select {
       width: 100%;
       padding: 0.875rem;
-      border: 2px solid #4e5762;
+      border: 2px solid var(--input-border);
       border-radius: 8px;
       font-size: 1rem;
-      transition: border-color 0.3s ease;
+      transition: all 0.3s ease;
+      background-color: var(--input-bg);
+      color: var(--light-text);
     }
 
     input:focus, select:focus {
       outline: none;
-      border-color: var(--secondary-color);
-      box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
     }
 
     .button-group {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
-      margin-top: 2rem;
+      margin-top: 2.5rem;
     }
 
     button {
@@ -168,29 +351,52 @@
       border-radius: 8px;
       font-weight: 600;
       cursor: pointer;
-      transition: transform 0.2s ease, opacity 0.2s ease;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(-100%);
+      transition: transform 0.5s ease;
+      z-index: -1;
+    }
+
+    button:hover::before {
+      transform: translateX(0);
     }
 
     button:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 7px 15px rgba(0, 0, 0, 0.2);
     }
 
     .whatsapp-btn {
-      background: #25D366;
+      background: linear-gradient(135deg, #25D366, #128C7E);
       color: white;
     }
 
     .email-btn {
-      background: var(--primary-color);
+      background: linear-gradient(135deg, #06B6D4, #0284C7);
       color: white;
     }
 
+    /* Footer */
     footer {
-      background: var(--primary-color);
-      color: white;
+      background: var(--darker-bg);
+      color: var(--muted-text);
       padding: 2rem;
       text-align: center;
       margin-top: 4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .footer-content {
@@ -198,9 +404,39 @@
       margin: 0 auto;
     }
 
+    /* Responsive Design */
     @media (max-width: 768px) {
+      .navbar-container {
+        padding: 0.75rem 1rem;
+      }
+
+      .nav-links {
+        position: fixed;
+        right: -100%;
+        top: 60px;
+        flex-direction: column;
+        background-color: var(--navbar-bg);
+        width: 80%;
+        height: 100vh;
+        padding: 2rem;
+        gap: 1.5rem;
+        transition: right 0.3s ease;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .mobile-nav-toggle {
+        display: block;
+      }
+
       .header-container {
-        height: 300px;
+        height: 350px;
+      }
+
+      header h1 {
+        font-size: 2rem;
       }
 
       .container {
@@ -211,21 +447,71 @@
       .button-group {
         grid-template-columns: 1fr;
       }
+
+      .contact-info {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+    }
+
+    /* Glow effects for interactive elements */
+    .whatsapp-btn:focus {
+      box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.3);
+    }
+
+    .email-btn:focus {
+      box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.3);
+    }
+
+    /* Subtle animation for form focus */
+    @keyframes formFocus {
+      0% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(6, 182, 212, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); }
+    }
+
+    input:focus, select:focus {
+      animation: formFocus 1.5s ease-out;
     }
   </style>
 </head>
 <body>
+  <!-- Animated Navbar -->
+  <nav class="navbar" id="mainNav">
+    <div class="navbar-container">
+      <a href="#" class="logo">
+        <i class="fas fa-video"></i>
+        <span>Yadhu</span> Tech
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="mobile-nav-toggle" id="mobileNavToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
 
-  <div class="header-container">
+  <div class="header-container" id="home">
     <div class="slideshow">
-      <img src="WhatsApp Image 2025-04-19 at 13.31.05_4fba3198.jpg" class="active" alt="img1">
-    
+      
+      <!-- <video width="640" height="360" controls>
+        <source src="0218(2)-VC.mp4" type="video/mp4">
+        <source src="example-video.webm" type="video/webm">
+        Your browser does not support the video tag.
+      </video> -->
+      <video autoplay muted loop playsinline class="active" poster="fallback.jpg">
+        <source src="0218(2)-VC.mp4" type="video/mp4">
+        <img src="fallback.jpg" alt="Header background">
+      </video>
     </div>
     <header>
       <div class="header-content">
-        <h1>YADHU SATHEESH</h1>
+        <h1>YADHU <span class="highlight">SATHEESH</span></h1>
         <p>THE PURPOSE OF THIS SITE IS TO CONVEY YOUR REQUEST TO ME FOR </p>
-        <p>VIDEO EDITING & MINI MOBILE PHOTOGRAPHY VIDEOGRAPHY</p>
+        <p><span class="highlight">VIDEO EDITING & MINI MOBILE PHOTOGRAPHY VIDEOGRAPHY</span></p>
         <div class="contact-info">
           <div class="contact-item">
             <i class="fas fa-phone"></i>
@@ -240,7 +526,7 @@
     </header>
   </div>
 
-  <div class="container">
+  <div class="container" id="services">
     <div class="form-header">
       <h2>Service Request Form</h2>
       <p>Get in touch with our experts for premium services</p>
@@ -259,7 +545,7 @@
           <option value="Mobile Videography">Mobile Videography Services</option>
         </select>
       </div>
-      <div class="button-group">
+      <div class="button-group" id="contact">
         <button type="button" class="whatsapp-btn" onclick="sendToWhatsApp()">
           <i class="fab fa-whatsapp"></i>
           WhatsApp
@@ -279,7 +565,64 @@
   </footer>
 
   <script>
-    // JavaScript remains similar with improvements for better UX
+    // Navbar Animation
+    const navbar = document.getElementById('mainNav');
+    const navToggle = document.getElementById('mobileNavToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+    
+    // Mobile menu toggle
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      
+      // Toggle icon
+      const icon = navToggle.querySelector('i');
+      if (navLinks.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    });
+    
+    // Close mobile menu when clicking on links
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        const icon = navToggle.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      });
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const navbarHeight = navbar.offsetHeight;
+          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+          
+          window.scrollTo({
+            top: targetPosition - navbarHeight - 20,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Form functions
     function getFormData() {
       return {
         name: document.getElementById('name').value.trim(),
@@ -336,7 +679,10 @@
       slides[currentSlide].classList.add('active');
     }
 
-    setInterval(nextSlide, 5000);
+    // Only start slideshow if there are multiple slides
+    if (slides.length > 1) {
+      setInterval(nextSlide, 5000);
+    }
   </script>
 
 </body>
